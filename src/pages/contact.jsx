@@ -67,25 +67,60 @@ const Contact = location => {
           <>
             <div className="container">
               <div className="row">
-                <p>
-                  Want to get in touch? Fill out the form below to send me a
-                  message and I will get back to you as soon as possible!
-                </p>
-
                 <div className="container mx-auto">
-									{/* このdivタグの中に、googleFormの＜送信＞からコピーした<iframe>タグを貼り付けてください */}
-                  <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSdOPYA_XS9Ab7HBl1KcjEk3P3fDDGXj-uU6-CSUrPwPvDg2sw/viewform?embedded=true"
-                    title="form"
-                    width="100%"
-                    height="900"
-                    frameborder="0"
-                    marginheight="0"
-                    marginwidth="0"
-                  >
-                    読み込んでいます…
-                  </iframe>
+                  <div className="col-md-6 offset-md-3 mt-5">
+										<h2>お問い合わせ</h2>
+                    <form
+                      acceptCharset="UTF-8"
+                      action="https://getform.io/f/76aa1111-aaba-491c-be0c-fc47a12142e2"
+                      method="POST"
+                      target="_blank"
+                    >
+                      <div className="form-group">
+                        <label htmlFor="exampleInputName">お名前</label>
+                        <input
+                          type="text"
+                          name="fullname"
+                          className="form-control"
+                          id="exampleInputName"
+                          placeholder="こちらにお名前をご入力ください。"
+                          required="required"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleInputEmail1" required="required">
+                          メールアドレス
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          placeholder="こちらにEmailアドレスをご入力ください。"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="exampleFormControlSelect1">
+                          メッセージ
+                        </label>
+                        <textarea
+                          className="form-control"
+                          rows={5}
+                          name="message"
+                          id="message"
+                          placeholder="こちらにメッセージをご入力ください。"
+                          required=""
+                          defaultValue={""}
+                        />
+                      </div>
+                      <button type="submit" className="btn btn-primary">
+                        送信
+                      </button>
+                    </form>
+                  </div>
                 </div>
+
               </div>
             </div>
             <hr />

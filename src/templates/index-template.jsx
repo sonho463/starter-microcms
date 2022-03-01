@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { htmlToText } from "html-to-text"
+import styled from "styled-components"
 
 import Back from "../components/background"
 import Pager from "../components/pager"
@@ -27,80 +28,92 @@ const Home = ({ data, pageContext }) => {
                     <h1>{pageContext.title}</h1>
                     <span className="subheading">{pageContext.subtitle}</span>
                   </div>
-                  <CategoryList key="node.id" />
                 </div>
               </div>
             </div>
           </header>
         </Back>
-
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 col-md-10 mx-auto">
-              <div className="clearfix">
-                <Pager
-                  currentPage={pageContext.currentPage}
-                  prev={prev}
-                  next={next}
-                  isFirst={pageContext.isFirst}
-                  isLast={pageContext.isLast}
-                />
-              </div>
-
-              {data.allMicrocmsPosts.edges.map(({ node }) => {
-                const author = node.author || data.microcmsConfig.defaultAuthor
-                const article = node.article || "no article"
-                const textData = htmlToText(article, {
-                  tags: {
-                    a: { options: { ignoreHref: true } },
-                    img: { format: "skip" },
-                  },
-                  limits: { ellipsis: "...", maxInputLength: 200 },
-                })
-                const description = node.description || `${textData}...`
-                const category = node.category
-                  ? node.category.category
-                  : "カテゴリ未設定"
-                const categorySlug = node.category
-                  ? `/cat/${node.category.categorySlug}/`
-                  : "/"
-
-                return (
-                  <div key={node.id}>
-                    <div className="post-preview">
-                      <Link to={`/blog/posts/${node.link}`}>
-                        <h2 className="post-title">{node.title}</h2>
-                        <h3 className="post-subtitle">{description}</h3>
-                      </Link>
-                      <p className="post-meta">
-                        Posted by
-                        <span>{author}</span>
-                        <br />
-                        <Link to={categorySlug}>カテゴリ：{category}</Link>
-                        <br />
-                        {node.updatedAtJP}
-                      </p>
-                    </div>
-                    <hr />
+        <Flex className="d-lg-flex">
+          <main className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <div className="container">
+              <div className="row">
+                <div className="mx-auto">
+                  <div className="clearfix">
+                    <Pager
+                      currentPage={pageContext.currentPage}
+                      prev={prev}
+                      next={next}
+                      isFirst={pageContext.isFirst}
+                      isLast={pageContext.isLast}
+                    />
                   </div>
-                )
-              })}
-              <hr />
-              <Pager
-                currentPage={pageContext.currentPage}
-                prev={prev}
-                next={next}
-                isFirst={pageContext.isFirst}
-                isLast={pageContext.isLast}
-              />
+
+                  {data.allMicrocmsPosts.edges.map(({ node }) => {
+                    const author =
+                      node.author || data.microcmsConfig.defaultAuthor
+                    const article = node.article || "no article"
+                    const textData = htmlToText(article, {
+                      tags: {
+                        a: { options: { ignoreHref: true } },
+                        img: { format: "skip" },
+                      },
+                      limits: { ellipsis: "...", maxInputLength: 200 },
+                    })
+                    const description = node.description || `${textData}...`
+                    const category = node.category
+                      ? node.category.category
+                      : "カテゴリ未設定"
+                    const categorySlug = node.category
+                      ? `/cat/${node.category.categorySlug}/`
+                      : "/"
+
+                    return (
+                      <div key={node.id}>
+                        <div className="post-preview">
+                          <Link to={`/blog/posts/${node.link}`}>
+                            <h2 className="post-title">{node.title}</h2>
+                            <h3 className="post-subtitle">{description}</h3>
+                          </Link>
+                          <p className="post-meta">
+                            Posted by
+                            <span>{author}</span>
+                            <br />
+                            <Link to={categorySlug}>カテゴリ：{category}</Link>
+                            <br />
+                            {node.updatedAtJP}
+                          </p>
+                        </div>
+                        <hr />
+                      </div>
+                    )
+                  })}
+                  <hr />
+                  <Pager
+                    currentPage={pageContext.currentPage}
+                    prev={prev}
+                    next={next}
+                    isFirst={pageContext.isFirst}
+                    isLast={pageContext.isLast}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <hr />
+            <hr />
+          </main>
+          <aside className="pl-5 col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <CategoryList key="node.id" />
+          </aside>
+        </Flex>
       </Layout>
     </>
   )
 }
+
+const Flex = styled.div`
+  /* display: flex; */
+	width: 80%;
+	margin: 0 auto;
+`
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {

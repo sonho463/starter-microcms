@@ -25,8 +25,8 @@ const CategoryList = () => {
 
       <CategoryMenu>
         {data.allMicrocmsCategory.edges.map(({ node }) => {
-          return (
-              <li key={node.id}>
+					return (
+						<li key={node.id}>
                 <Link to={`/cat/${node.categorySlug}`}>
                   <p >{node.category}</p>
                 </Link>
@@ -38,26 +38,29 @@ const CategoryList = () => {
 }
 
 const Heading = styled.h3`
-  color: #fff;
+  color: #333;
   margin: 0.3em;
 `
 
 const CategoryMenu = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  background-color: rgba(51, 51, 51, 0.7);
   a {
-    color: white;
+		display: block;
+    color: #333;
+		&:hover{
+			background-color: pink;
+		}
   }
   p {
     margin: 0;
   }
-  li {
-    line-height: 0.8;
-    list-style: none;
-    padding: 0 0.5em;
-    margin: 0;
-  }
+	li {
+		line-height: 0.8;
+		list-style: none;
+		padding: 0 0.5em;
+		margin: 4px;
+		border-radius: 5px;
+	}
+
 `
 
 export default CategoryList
