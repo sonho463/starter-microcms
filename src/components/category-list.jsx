@@ -21,46 +21,52 @@ const CategoryList = () => {
 
   return (
     <>
-      <Heading>カテゴリリスト</Heading>
 
       <CategoryMenu>
         {data.allMicrocmsCategory.edges.map(({ node }) => {
-					return (
-						<li key={node.id}>
-                <Link to={`/cat/${node.categorySlug}`}>
-                  <p >{node.category}</p>
-                </Link>
-              </li>          )
+          return (
+            <li key={node.id}>
+              <Link to={`/cat/${node.categorySlug}`}>
+                <p>{node.category}</p>
+              </Link>
+            </li>
+          )
         })}
       </CategoryMenu>
     </>
   )
 }
 
-const Heading = styled.h3`
-  color: #333;
-  margin: 0.3em;
-`
+// const Heading = styled.h3`
+//   color: #333;
+//   margin: 0.3em;
+// `
 
 const CategoryMenu = styled.ul`
+  display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	background-color: #333;
   a {
 		display: block;
-    color: #333;
-		&:hover{
-			background-color: pink;
-		}
+    color: #fff;
   }
   p {
-    margin: 0;
+		margin: 0;
   }
-	li {
+  li {
 		line-height: 0.8;
-		list-style: none;
-		padding: 0 0.5em;
-		margin: 4px;
-		border-radius: 5px;
-	}
-
+    list-style: none;
+    padding: 0 0.5em;
+    margin: 4px;
+    border-radius: 5px;
+		&:hover {
+			background-color: #fff;
+			a{
+				color: #333;
+			}
+		}
+  }
 `
 
 export default CategoryList

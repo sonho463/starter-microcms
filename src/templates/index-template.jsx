@@ -19,7 +19,7 @@ const Home = ({ data, pageContext }) => {
 
       <Layout>
         <Back>
-          <header className="masthead">
+          <header className="masthead mb-0">
             <div className="overlay" />
             <div className="container">
               <div className="row">
@@ -33,61 +33,14 @@ const Home = ({ data, pageContext }) => {
             </div>
           </header>
         </Back>
-        <Flex className="d-lg-flex">
-          <main className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-            <div className="container">
-              <div className="row">
-                <div className="mx-auto">
-                  <div className="clearfix">
-                    <Pager
-                      currentPage={pageContext.currentPage}
-                      prev={prev}
-                      next={next}
-                      isFirst={pageContext.isFirst}
-                      isLast={pageContext.isLast}
-                    />
-                  </div>
-
-                  {data.allMicrocmsPosts.edges.map(({ node }) => {
-                    const author =
-                      node.author || data.microcmsConfig.defaultAuthor
-                    const article = node.article || "no article"
-                    const textData = htmlToText(article, {
-                      tags: {
-                        a: { options: { ignoreHref: true } },
-                        img: { format: "skip" },
-                      },
-                      limits: { ellipsis: "...", maxInputLength: 200 },
-                    })
-                    const description = node.description || `${textData}...`
-                    const category = node.category
-                      ? node.category.category
-                      : "カテゴリ未設定"
-                    const categorySlug = node.category
-                      ? `/cat/${node.category.categorySlug}/`
-                      : "/"
-
-                    return (
-                      <div key={node.id}>
-                        <div className="post-preview">
-                          <Link to={`/blog/posts/${node.link}`}>
-                            <h2 className="post-title">{node.title}</h2>
-                            <h3 className="post-subtitle">{description}</h3>
-                          </Link>
-                          <p className="post-meta">
-                            Posted by
-                            <span>{author}</span>
-                            <br />
-                            <Link to={categorySlug}>カテゴリ：{category}</Link>
-                            <br />
-                            {node.updatedAtJP}
-                          </p>
-                        </div>
-                        <hr />
-                      </div>
-                    )
-                  })}
-                  <hr />
+        <div className="mx-auto">
+          <CategoryList key="node.id" />
+        </div>
+        <main className="col-10 mx-auto">
+          <div className="container">
+            <div className="row">
+              <div className="mx-auto">
+                <div className="clearfix">
                   <Pager
                     currentPage={pageContext.currentPage}
                     prev={prev}
@@ -96,24 +49,63 @@ const Home = ({ data, pageContext }) => {
                     isLast={pageContext.isLast}
                   />
                 </div>
+
+                {data.allMicrocmsPosts.edges.map(({ node }) => {
+                  const author =
+                    node.author || data.microcmsConfig.defaultAuthor
+                  const article = node.article || "no article"
+                  const textData = htmlToText(article, {
+                    tags: {
+                      a: { options: { ignoreHref: true } },
+                      img: { format: "skip" },
+                    },
+                    limits: { ellipsis: "...", maxInputLength: 200 },
+                  })
+                  const description = node.description || `${textData}...`
+                  const category = node.category
+                    ? node.category.category
+                    : "カテゴリ未設定"
+                  const categorySlug = node.category
+                    ? `/cat/${node.category.categorySlug}/`
+                    : "/"
+
+                  return (
+                    <div key={node.id}>
+                      <div className="post-preview">
+                        <Link to={`/blog/posts/${node.link}`}>
+                          <h2 className="post-title">{node.title}</h2>
+                          <h3 className="post-subtitle">{description}</h3>
+                        </Link>
+                        <p className="post-meta">
+                          Posted by
+                          <span>{author}</span>
+                          <br />
+                          <Link to={categorySlug}>カテゴリ：{category}</Link>
+                          <br />
+                          {node.updatedAtJP}
+                        </p>
+                      </div>
+                      <hr />
+                    </div>
+                  )
+                })}
+                <hr />
+                <Pager
+                  currentPage={pageContext.currentPage}
+                  prev={prev}
+                  next={next}
+                  isFirst={pageContext.isFirst}
+                  isLast={pageContext.isLast}
+                />
               </div>
             </div>
-            <hr />
-          </main>
-          <aside className="pl-5 col-xs-12 col-sm-12 col-md-12 col-lg-4">
-            <CategoryList key="node.id" />
-          </aside>
-        </Flex>
+          </div>
+          <hr />
+        </main>
       </Layout>
     </>
   )
 }
-
-const Flex = styled.div`
-  /* display: flex; */
-	width: 80%;
-	margin: 0 auto;
-`
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
