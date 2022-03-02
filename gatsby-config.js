@@ -6,13 +6,13 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `そんほんすのブログ`,
-    siteUrl: "https://starter-microcms-gc.netlify.app/",
+    title: `gatsby-microCMSブログ`,
+    siteUrl: "https://gatsby-microcms-blog.netlify.app/",
     description: `これは、GatsbyとmicroCMSで作ったブログです。`,
     lang: `ja`,
 		locale: `ja_jp`,
 		fbappid: `510836253386080`,
-		
+
   },
   /* Your site config here */
   plugins: [
