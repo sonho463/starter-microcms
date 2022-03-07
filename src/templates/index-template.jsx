@@ -36,7 +36,7 @@ const Home = ({ data, pageContext }) => {
         <div className="mx-auto">
           <CategoryList key="node.id" />
         </div>
-        <main className="col-10 mx-auto">
+        <main className="col-8 mx-auto">
           <div className="container">
             <div className="row">
               <div className="mx-auto">

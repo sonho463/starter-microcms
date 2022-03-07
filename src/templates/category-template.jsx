@@ -7,11 +7,9 @@ import Seo from "../components/seo"
 import Layout from "../components/layout"
 import CategoryList from "../components/category-list"
 
-const CategoryPage=({ data, location, pageContext })=> {
-
+const CategoryPage = ({ data, location, pageContext }) => {
   return (
     <>
-
       <Seo
         pageTitle={`CATEGORY: ${pageContext.catName}`}
         pageDescription={`「${pageContext.catName}」カテゴリーの記事です`}
@@ -20,7 +18,7 @@ const CategoryPage=({ data, location, pageContext })=> {
 
       <Layout>
         <Back>
-          <header className="masthead">
+          <header className="masthead mb-0">
             <div className="overlay" />
             <div className="container">
               <div className="row">
@@ -28,17 +26,18 @@ const CategoryPage=({ data, location, pageContext })=> {
                   <div className="site-heading">
                     <h1>カテゴリ: {pageContext.catName}</h1>
                   </div>
-						<CategoryList key="node.id" />
                 </div>
               </div>
             </div>
           </header>
         </Back>
+        <div className="mx-auto">
+          <CategoryList />
+        </div>
 
         <div className="container">
           <div className="row">
             <div className="col-lg-8 col-md-10 mx-auto">
-
               {data.allMicrocmsPosts.edges.map(({ node }) => {
                 const author = node.author || "Dそんほんす"
                 const article = node.article || "no article"

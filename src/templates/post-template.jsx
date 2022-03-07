@@ -5,6 +5,7 @@ import styled from "styled-components"
 import Seo from "../components/seo"
 import Layout from "../components/layout"
 import MicroCmsImage from "../components/microcms-img"
+import CategoryList from "../components/category-list"
 
 export default function Home({ data, pageContext }) {
   const article = data.microcmsPosts.article
@@ -33,7 +34,6 @@ export default function Home({ data, pageContext }) {
 
   return (
     <>
-
       <Seo />
 
       <Layout>
@@ -49,7 +49,7 @@ export default function Home({ data, pageContext }) {
           />
 
           <header
-            className="masthead"
+            className="masthead mb-0"
             style={{ position: "relative", overflow: "hidden" }}
           >
             <MicroCmsImage
@@ -78,7 +78,11 @@ export default function Home({ data, pageContext }) {
               </div>
             </div>
           </header>
+
           <article>
+					<div className="mx-auto mb-5">
+            <CategoryList/>
+          </div>
             <div className="container">
               <div className="row">
                 <div className="col-lg-8 col-md-10 mx-auto">
